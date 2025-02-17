@@ -2,14 +2,18 @@
 let canvas = document.getElementById("snake"); //criar elemento que irá rodar o jogo
 let context = canvas.getContext("2d");
 
+// Pergunta o nome do usuário antes de iniciar o jogo
+let userName = prompt("Qual é o seu nome?");
+document.getElementById("welcome-message").innerText = `Bem-vindo(a), ${userName}!`;
+
 // Define o tamanho de cada quadrado da cobrinha e da comida
 let box = 32;
 
 // Inicializa a cobrinha como uma lista de coordenadas
 let snake = []; //criar cobrinha como lista, já que ela vai ser uma série de coordenadas, que quando pintadas, criam os quadradinhos
 snake[0] = {
-    x: 8 * box,
-    y: 8 * box
+    x: 12 * box, // Adjusted to match new canvas size
+    y: 12 * box  // Adjusted to match new canvas size
 }
 
 // Define a direção inicial da cobrinha
@@ -17,14 +21,14 @@ let direction = "right";
 
 // Gera a posição inicial da comida de forma aleatória
 let food = {
-    x: Math.floor(Math.random() * 15 + 1) * box,
-    y: Math.floor(Math.random() * 15 + 1) * box
+    x: Math.floor(Math.random() * 23 + 1) * box, // Adjusted to match new canvas size
+    y: Math.floor(Math.random() * 23 + 1) * box  // Adjusted to match new canvas size
 }
 
 // Função para criar o fundo do jogo
 function criarBG(){
     context.fillStyle = "lightgreen";
-    context.fillRect(0, 0, 16 * box, 16 * box);
+    context.fillRect(0, 0, 24 * box, 24 * box); // Adjusted to match new canvas size
 }
 
 // Função para desenhar a cobrinha no canvas
@@ -56,10 +60,10 @@ function update (event){
 function iniciarJogo(){
 
     // Verifica se a cobrinha saiu dos limites do canvas e a reposiciona do outro lado
-    if(snake[0].x > 15 * box && direction == "right") snake[0].x = 0;
-    if(snake[0].x < 0 && direction == "left") snake[0].x = 16 * box;
-    if(snake[0].y > 15 * box && direction == "down") snake[0].y =0;
-    if(snake[0].y <0 && direction == "up") snake[0].y = 16 * box;
+    if(snake[0].x > 23 * box && direction == "right") snake[0].x = 0; // Adjusted to match new canvas size
+    if(snake[0].x < 0 && direction == "left") snake[0].x = 24 * box; // Adjusted to match new canvas size
+    if(snake[0].y > 23 * box && direction == "down") snake[0].y = 0; // Adjusted to match new canvas size
+    if(snake[0].y < 0 && direction == "up") snake[0].y = 24 * box; // Adjusted to match new canvas size
 
     // Verifica se a cobrinha colidiu com ela mesma
     for( i = 1; i < snake.length; i++){
@@ -90,8 +94,8 @@ function iniciarJogo(){
     }
     else{
         // Gera uma nova posição aleatória para a comida
-        food.x = Math.floor(Math.random() * 15 + 1) * box,
-        food.y = Math.floor(Math.random() * 15 + 1) * box
+        food.x = Math.floor(Math.random() * 23 + 1) * box, // Adjusted to match new canvas size
+        food.y = Math.floor(Math.random() * 23 + 1) * box  // Adjusted to match new canvas size
     }
     
     // Cria a nova cabeça da cobrinha
