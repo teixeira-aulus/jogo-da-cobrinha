@@ -7,3 +7,9 @@ body{
     flex-direction: column;
     color: rgb(10, 109, 10);
 }
+
+#score-container {
+    margin-top: 10px;
+    font-size: 20px;
+    color: rgb(10, 109, 10);
+}
