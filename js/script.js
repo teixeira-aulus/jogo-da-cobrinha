@@ -35,7 +35,7 @@ function criarBG(){
 
 // Função para desenhar a cobrinha no canvas
 function criarCobrinha (){
-    for(i = 0; i < snake.length; i++){
+    for(let i = 0; i < snake.length; i++){
         context.fillStyle = "green";
         context.fillRect(snake[i].x, snake[i].y, box, box);
     }
@@ -87,12 +87,6 @@ function iniciarJogo(){
         }
     }
 
-    // Desenha o fundo, a cobrinha, a comida e a pontuação no canvas
-    criarBG();
-    criarCobrinha();
-    drawFood();
-    drawScore();
-
     // Pega a posição atual da cabeça da cobrinha
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
@@ -123,6 +117,12 @@ function iniciarJogo(){
 
     // Adiciona a nova cabeça no início da lista da cobrinha
     snake.unshift(newHead); //método unshift adiciona como primeiro quadradinho da cobrinha
+
+    // Desenha o fundo, a cobrinha, a comida e a pontuação no canvas
+    criarBG();
+    criarCobrinha();
+    drawFood();
+    drawScore();
 }
 
 // Define um intervalo para atualizar o jogo a cada 100 milissegundos
