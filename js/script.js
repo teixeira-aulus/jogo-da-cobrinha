@@ -4,10 +4,12 @@ let context = canvas.getContext("2d");
 
 // Pergunta o nome do usuário antes de iniciar o jogo
 let userName = prompt("Qual é o seu nome?");
-document.getElementById("welcome-message").innerText = `Bem-vindo(a), ${userName}!`;
 
 // Define o tamanho de cada quadrado da cobrinha e da comida
 let box = 32;
+
+// Inicializa a pontuação
+let score = 0;
 
 // Inicializa a cobrinha como uma lista de coordenadas
 let snake = []; //criar cobrinha como lista, já que ela vai ser uma série de coordenadas, que quando pintadas, criam os quadradinhos
@@ -45,6 +47,18 @@ function drawFood(){
     context.fillRect(food.x, food.y, box, box)
 }
 
+// Função para desenhar a pontuação no canvas
+function drawScore() {
+    context.fillStyle = "black";
+    context.font = "20px Arial";
+    context.fillText("Score: " + score, box, box);
+}
+
+// Função para atualizar a tabela de pontuação
+function updateScoreTable() {
+    document.getElementById("score-display").innerText = `Score: ${score}`;
+}
+
 // Adiciona um evento para capturar as teclas pressionadas e atualizar a direção da cobrinha
 document.addEventListener('keydown', update);
 
@@ -73,10 +87,11 @@ function iniciarJogo(){
         }
     }
 
-    // Desenha o fundo, a cobrinha e a comida no canvas
+    // Desenha o fundo, a cobrinha, a comida e a pontuação no canvas
     criarBG();
     criarCobrinha();
     drawFood();
+    drawScore();
 
     // Pega a posição atual da cabeça da cobrinha
     let snakeX = snake[0].x;
@@ -94,8 +109,10 @@ function iniciarJogo(){
     }
     else{
         // Gera uma nova posição aleatória para a comida
-        food.x = Math.floor(Math.random() * 23 + 1) * box, // Adjusted to match new canvas size
-        food.y = Math.floor(Math.random() * 23 + 1) * box  // Adjusted to match new canvas size
+        food.x = Math.floor(Math.random() * 23 + 1) * box; // Adjusted to match new canvas size
+        food.y = Math.floor(Math.random() * 23 + 1) * box; // Adjusted to match new canvas size
+        score += 10; // Incrementa a pontuação em 10 pontos
+        updateScoreTable(); // Atualiza a tabela de pontuação
     }
     
     // Cria a nova cabeça da cobrinha
